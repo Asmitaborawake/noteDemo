@@ -21,7 +21,7 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
         loadNotes()
         
         setupUI()
-        
+        print("asmita")
         
     }
     //MARK: uisetup method
