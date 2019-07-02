@@ -16,6 +16,7 @@
 		04F81162226DBC6E00434297 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F81160226DBC6E00434297 /* NoteTableViewCell.swift */; };
 		04F81163226DBC6E00434297 /* NoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F81161226DBC6E00434297 /* NoteTableViewCell.xib */; };
 		04F81168226DDB2C00434297 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F81167226DDB2C00434297 /* EditViewController.swift */; };
+		CECB637822CB3EF500B8AEE9 /* SettingTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECB637722CB3EF500B8AEE9 /* SettingTableVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		04F81160226DBC6E00434297 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		04F81161226DBC6E00434297 /* NoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteTableViewCell.xib; sourceTree = "<group>"; };
 		04F81167226DDB2C00434297 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		CECB637722CB3EF500B8AEE9 /* SettingTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				04F8114B226DB21300434297 /* AppDelegate.swift */,
 				04F8114D226DB21300434297 /* ViewController.swift */,
 				04F81167226DDB2C00434297 /* EditViewController.swift */,
+				CECB637722CB3EF500B8AEE9 /* SettingTableVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				04F81154226DB21300434297 /* Note.xcdatamodeld in Sources */,
 				04F8114E226DB21300434297 /* ViewController.swift in Sources */,
 				04F8114C226DB21300434297 /* AppDelegate.swift in Sources */,
+				CECB637822CB3EF500B8AEE9 /* SettingTableVC.swift in Sources */,
 				04F81162226DBC6E00434297 /* NoteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

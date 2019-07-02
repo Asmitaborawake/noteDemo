@@ -15,7 +15,10 @@ class EditViewController: UIViewController , UITextFieldDelegate {
 
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var titleLbl: UITextField!
-    @IBOutlet weak var descLbl: UITextField!
+    
+    @IBOutlet weak var descLbl: UITextView!
+    
+    
     
     var selectedNote = [Note]()
     var delegate : editDataDelegate?
@@ -29,8 +32,8 @@ class EditViewController: UIViewController , UITextFieldDelegate {
     func setupUI() {
         topView.layer.cornerRadius = 10
         topView.layer.borderWidth = 1
-        topView.layer.borderColor = UIColor.black.cgColor
-        
+        topView.layer.borderColor = UIColor.orange.cgColor
+        self.title = "Edit Note"
         for data in selectedNote {
             titleLbl.text = data.title
             descLbl.text = data.descriptionLbl
