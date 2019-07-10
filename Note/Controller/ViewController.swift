@@ -8,9 +8,10 @@
 
 import UIKit
 import CoreData
-class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataSource , editDataDelegate,fontsizepassDelegate{
+class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataSource , editDataDelegate,fontsizepassDelegate {
     
     var noteArray = [Note]()
+    var currentNoteArray = [Note]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var isDelegateSelect = false
     var fontName = String()
@@ -19,12 +20,15 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
     
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var addButton: UIButton!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadNotes()
         
         setupUI()
-
+        setUISearchBar()
         print("asmita")
         
     }
@@ -41,7 +45,10 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
         //load xib cell
         let nib = UINib.init(nibName: "NoteTableViewCell", bundle: nil)
         self.noteTableViewController.register(nib, forCellReuseIdentifier: "NoteTableViewCell")
-        
+         self.currentNoteArray = self.noteArray
+    }
+    func setUISearchBar() {
+        searchBar.delegate = self
     }
     //settingTVC delegate
     func fontsizepass(fontName: String,fontSize:CGFloat) {
@@ -59,27 +66,30 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
     }
     //MARK: tableview datasource method
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return noteArray.count
+        return currentNoteArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  noteTableViewController.dequeueReusableCell(withIdentifier: "NoteTableViewCell", for: indexPath) as! NoteTableViewCell
-        let note = noteArray[indexPath.row]
+        let note = currentNoteArray[indexPath.row]
         
         cell.topView.layer.cornerRadius = 10
         cell.topView.layer.borderWidth = 1
-        cell.topView.layer.borderColor = UIColor.orange.cgColor
+        cell.topView.layer.borderColor = UIColor.white.cgColor
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
         if isDelegateSelect{
             cell.title.text =  note.title
             cell.descriptionLbl.text = note.descriptionLbl
+            cell.dateTimeLbl.text = note.createddate
             
         }else {
             cell.title.text =  note.title
             cell.title.font = UIFont(name: self.fontName, size: self.fontSize)
             cell.descriptionLbl.text = note.descriptionLbl
             cell.descriptionLbl.font = UIFont(name: self.fontName, size: self.fontSize)
+            cell.dateTimeLbl.text = note.createddate
+            cell.dateTimeLbl.font = UIFont(name: self.fontName, size: self.fontSize)
         }
         
         
@@ -101,7 +111,7 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
         let destinationVC = segue.destination as! EditViewController
         
         if let index =  noteTableViewController.indexPathForSelectedRow {
-            destinationVC.selectedNote = [noteArray[index.row]]
+            destinationVC.selectedNote = [currentNoteArray[index.row]]
             //setting delegate method
             destinationVC.delegate = self
         }
@@ -111,8 +121,8 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
     //save data back to coredata object
     func editdata(title: String, desc: String) {
         if let index =  noteTableViewController.indexPathForSelectedRow{
-            noteArray[index.row].setValue(title, forKey: "title")
-            noteArray[index.row].setValue(desc, forKey: "descriptionLbl")
+            currentNoteArray[index.row].setValue(title, forKey: "title")
+            currentNoteArray[index.row].setValue(desc, forKey: "descriptionLbl")
             saveitems()
         }
     }
@@ -120,11 +130,28 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
     //on editstyle delete cell we delete coredata data
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            context.delete(noteArray[indexPath.row])
-            noteArray.remove(at: indexPath.row)
+            context.delete(currentNoteArray[indexPath.row])
+            currentNoteArray.remove(at: indexPath.row)
             saveitems()
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        
+        let label = UILabel()
+        label.frame = CGRect.init(x: 5, y: 3, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        label.text = "July"
+        label.font = UIFont(name: "FontAwesome", size: 16)
+        label.textColor = UIColor.gray
+
+        headerView.addSubview(label)
+        
+        return headerView
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {
@@ -140,9 +167,12 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
             if !textField.text!.isEmpty && !textfieldOne.text!.isEmpty{
                 newNote.title = textField.text!
                 newNote.descriptionLbl = textfieldOne.text!
+                let datetime = NSDate()
                 
+                newNote.createddate  = datetime.currentDateAndTime()
                 //append textfield data in array
                 self.noteArray.append(newNote)
+               
                 //save data in coredata conext
                 self.saveitems()
             }else {
@@ -190,5 +220,40 @@ class ViewController: UIViewController  , UITableViewDelegate , UITableViewDataS
         self.noteTableViewController.reloadData()
     }
     
+   
+    
 }
 
+extension NSDate {
+    func currentDateAndTime() -> String {
+        let currentDateTime = Date()
+        
+        // initialize the date formatter and set the style
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateStyle = .long
+        
+        // get the date time String from the date object
+       return formatter.string(from: currentDateTime)
+    }
+}
+
+
+extension ViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        
+        
+        guard !searchText.isEmpty else {
+            currentNoteArray = noteArray
+            noteTableViewController.reloadData()
+            return
+        }
+        currentNoteArray = noteArray.filter({ (note) -> Bool in
+            
+           
+                 (note.title?.lowercased().contains(searchText.lowercased()))!
+        })
+        noteTableViewController.reloadData()
+    }
+}

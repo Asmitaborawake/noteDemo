@@ -14,6 +14,7 @@ class NoteTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
     
+    @IBOutlet weak var dateTimeLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

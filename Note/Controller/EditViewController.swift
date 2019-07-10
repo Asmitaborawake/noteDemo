@@ -32,7 +32,7 @@ class EditViewController: UIViewController , UITextFieldDelegate {
     func setupUI() {
         topView.layer.cornerRadius = 10
         topView.layer.borderWidth = 1
-        topView.layer.borderColor = UIColor.orange.cgColor
+        topView.layer.borderColor = UIColor.white.cgColor
         self.title = "Edit Note"
         for data in selectedNote {
             titleLbl.text = data.title
