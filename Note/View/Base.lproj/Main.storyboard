@@ -110,16 +110,16 @@
                                 <rect key="frame" x="0.0" y="108" width="375" height="515"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoteTableViewCell" rowHeight="135" id="EKR-f1-BsO" customClass="NoteTableViewCell" customModule="Note" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoteTableViewCell" rowHeight="135" id="EKR-f1-BsO" customClass="NoteTableViewCell" customModule="Note" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="135"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EKR-f1-BsO" id="LRQ-Gp-Prs">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="134.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <connections>
-                                            <segue destination="I9v-4c-5up" kind="show" identifier="editVC" id="KGg-ra-uwv"/>
+                                            <segue destination="I9v-4c-5up" kind="showDetail" identifier="editVC" id="KGg-ra-uwv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -183,7 +183,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3CH-bD-Wjj">
-                                <rect key="frame" x="8" y="72" width="359" height="261"/>
+                                <rect key="frame" x="8" y="66" width="359" height="261"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zGc-ru-7gi">
                                         <rect key="frame" x="8" y="18" width="343" height="30"/>
@@ -221,7 +221,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLV-8c-TEg">
-                                <rect key="frame" x="140" y="382" width="95" height="39"/>
+                                <rect key="frame" x="140" y="376" width="95" height="39"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="sAu-Dh-o6f"/>
@@ -243,18 +243,46 @@
                                     <action selector="doneClick:" destination="I9v-4c-5up" eventType="touchUpInside" id="UIq-ES-g76"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mU0-pQ-fEF">
+                                <rect key="frame" x="0.0" y="16" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="dpC-XR-6za"/>
+                                </constraints>
+                                <color key="tintColor" red="0.61740340930000004" green="0.61740340930000004" blue="0.61740340930000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.61740340930000004" green="0.61740340930000004" blue="0.61740340930000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Edit Note" id="78t-sI-dos">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="zfN-U2-mw3">
+                                            <connections>
+                                                <action selector="backClick:" destination="I9v-4c-5up" id="JGu-N8-Myz"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Share" id="lNJ-0D-gFQ">
+                                            <connections>
+                                                <action selector="shareClick:" destination="I9v-4c-5up" id="zBp-I1-UCX"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qKI-d5-feW" firstAttribute="trailing" secondItem="3CH-bD-Wjj" secondAttribute="trailing" constant="8" id="ENC-2C-1Xa"/>
+                            <constraint firstItem="mU0-pQ-fEF" firstAttribute="leading" secondItem="qKI-d5-feW" secondAttribute="leading" id="Fdv-8U-2vc"/>
+                            <constraint firstItem="mU0-pQ-fEF" firstAttribute="top" secondItem="qKI-d5-feW" secondAttribute="top" constant="-4" id="NuB-bL-It8"/>
                             <constraint firstItem="qKI-d5-feW" firstAttribute="trailing" secondItem="WLV-8c-TEg" secondAttribute="trailing" constant="140" id="PIO-Tg-49G"/>
                             <constraint firstItem="3CH-bD-Wjj" firstAttribute="leading" secondItem="qKI-d5-feW" secondAttribute="leading" constant="8" id="Sey-eZ-uCB"/>
-                            <constraint firstItem="3CH-bD-Wjj" firstAttribute="top" secondItem="qKI-d5-feW" secondAttribute="top" constant="8" id="jXz-qJ-Bp8"/>
+                            <constraint firstItem="mU0-pQ-fEF" firstAttribute="trailing" secondItem="qKI-d5-feW" secondAttribute="trailing" id="Za5-OB-iY8"/>
+                            <constraint firstItem="3CH-bD-Wjj" firstAttribute="top" secondItem="mU0-pQ-fEF" secondAttribute="bottom" constant="6" id="eC6-bn-z3c"/>
                             <constraint firstItem="WLV-8c-TEg" firstAttribute="top" secondItem="3CH-bD-Wjj" secondAttribute="bottom" constant="49" id="ne8-I5-c6d"/>
                             <constraint firstItem="WLV-8c-TEg" firstAttribute="leading" secondItem="qKI-d5-feW" secondAttribute="leading" constant="140" id="wcJ-Ob-032"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qKI-d5-feW"/>
                     </view>
+                    <navigationItem key="navigationItem" id="FkC-Zy-zow"/>
                     <connections>
                         <outlet property="descLbl" destination="9rH-ZX-QuB" id="iiK-xo-fft"/>
                         <outlet property="titleLbl" destination="zGc-ru-7gi" id="hK7-KH-28N"/>

@@ -47,7 +47,9 @@ class EditViewController: UIViewController , UITextFieldDelegate {
         let desc =  descLbl.text!
         delegate?.editdata(title: title, desc: desc)
     
-        self.navigationController?.popToRootViewController(animated: true)
+       // self.navigationController?.popToRootViewController(animated: true)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -58,4 +60,18 @@ class EditViewController: UIViewController , UITextFieldDelegate {
         view.endEditing(true)
         
     }
+    
+    
+    @IBAction func shareClick(_ sender: Any) {
+        
+        let activityvc = UIActivityViewController(activityItems: [titleLbl.text!, descLbl.text!], applicationActivities: nil)
+        present(activityvc, animated: true, completion: nil)
+    }
+   
+    
+    @IBAction func backClick(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
